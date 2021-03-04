@@ -1,30 +1,28 @@
-/*Домашка 8.2) Вывести в 1 строку через пробел все числа от 1 до 99 со следующими изменениями:
-- если число кратно 3 то вывести вместо него Hello
-- если число кратно 5 то вывести вместо него World
-- если число кратно и 3 и 5 то вывести вместо него HelloWorld*/
+/*Домашка 8.1) В банк положили S денег. Какой станет сумма вклада через N лет,
+если процент 1,5% добавляется к сумме вклада ежемесячно*/
 
 package com.company;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        for (int i = 1; i <= 99; i++) {
-            if (isMuliple(i, 3) & isMuliple(i, 5)) {
-                System.out.printf(" HelloWorld");
-            } else if (isMuliple(i, 3)) {
-                System.out.printf(" Hello");
-            } else if (isMuliple(i, 5)) {
-                System.out.printf(" World");
-            } else {
-                System.out.printf(" " + i);
-            }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите сумму депозита:");
+        double deposit = scanner.nextDouble();
+        System.out.println("Введите количество лет:");
+        int years = scanner.nextInt();
+        double interestRates = 0.015;
+        for (int i = 1; i <= years; i++) {
+            deposit = capitalizationProcents(deposit, interestRates);
         }
+        System.out.printf("Сумма депозита с наращенными процентами: %.2f\n", deposit);
     }
 
-    private static boolean isMuliple(int numbers, int divider) {
-        if (numbers % divider == 0) {
-            return true;
-        } else {
-            return false;
+    private static double capitalizationProcents(double deposit, double interestRates) {
+        for (int month = 1; month <= 12; month++) {
+            deposit = deposit * (1 + interestRates);
         }
+        return deposit;
     }
 }
