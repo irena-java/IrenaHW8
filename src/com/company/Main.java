@@ -1,39 +1,30 @@
-/*Домашка 8.3*) Написать метод.
-Входящий параметр:
-Строка со словами разделенными пробелом которые состоят из больших и маленьких букв.
-Метод должен вернуть ту же строку в которой первая буква в каждом слове большая, а остальные маленькие*/
+/*Домашка 8.2) Вывести в 1 строку через пробел все числа от 1 до 99 со следующими изменениями:
+- если число кратно 3 то вывести вместо него Hello
+- если число кратно 5 то вывести вместо него World
+- если число кратно и 3 и 5 то вывести вместо него HelloWorld*/
 
 package com.company;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите текст:");
-        String text = scanner.nextLine();
-        System.out.println(txtWithBigLetter(text));
-    }
-
-    private static String txtWithBigLetter(String text) {
-        String[] wordsArr = text.split(" ");
-        String changedText = "";
-        String nextWord;
-        for (int i = 0; i < wordsArr.length; i++) {
-            nextWord = bigLetter(wordsArr[i].toLowerCase());
-            changedText = changedText.concat(nextWord).concat(" ");
+        for (int i = 1; i <= 99; i++) {
+            if (isMuliple(i, 3) & isMuliple(i, 5)) {
+                System.out.printf(" HelloWorld");
+            } else if (isMuliple(i, 3)) {
+                System.out.printf(" Hello");
+            } else if (isMuliple(i, 5)) {
+                System.out.printf(" World");
+            } else {
+                System.out.printf(" " + i);
+            }
         }
-        return eraseLastSpase(changedText);
     }
 
-    private static String bigLetter(String word) {
-        String firstLetter;
-        firstLetter = word.substring(0, 1).toUpperCase();
-        return firstLetter + word.substring(1);
-    }
-
-    private static String eraseLastSpase(String txt) {
-        txt = txt.substring(0, txt.length() - 1);
-        return txt;
+    private static boolean isMuliple(int numbers, int divider) {
+        if (numbers % divider == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
